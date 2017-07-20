@@ -22,7 +22,7 @@ function findHandler(handlers, method, url, body, parameters) {
   return find(handlers[method.toLowerCase()], function(handler) {
     if (typeof handler[0] === 'string') {
       return isUrlMatching(url, handler[0]) && isBodyOrParametersMatching(method, body, parameters, handler[1]);
-    } else if (handler[0] instanceof RegExp) {
+    } else if ({}.toString.call(handler[0])==='[object RegExp]') {
       return handler[0].test(url) && isBodyOrParametersMatching(method, body, parameters, handler[1]);
     }
   });
